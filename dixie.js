@@ -5,15 +5,15 @@
 //  Additional IP Rights Grant:  http://www.webmproject.org/license/additional/
 // -----------------------------------------------------------------------------
 //
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-// IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-// BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY 
-// OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+// BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+// OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 // -----------------------------------------------------------------------------
@@ -23,7 +23,7 @@
 
 "use strict";
 
-
+var HACK_BASE_FRAME_TO_GOLDEN_FRAME = 0;
 
 /* Definition of the argument values for the exit() function stdlib.h*/
 
@@ -50,7 +50,7 @@ var buffer8k=function() {return Arr(8800,0)};
 function fread ( ptr, size, count, stream ) {
 	ptr.val=new buffer8k();//new Array();
 	//todo: size include
-	
+
 	if(stream.data.length<count+stream.data_off) {stream.data_off += count; return 0; }
 	for(var i=0;i<count;++i)
 		ptr.val[i]=(stream.data[stream.data_off++]);
@@ -114,7 +114,7 @@ function memcpy(dst, dst_off, src, src_off, num) {
 
 function memset(ptr, ptr_off, value, num) {
 	var i=0;
-		for(i=0; i<num; ++i) 
+		for(i=0; i<num; ++i)
 			ptr[ptr_off + i]=value;
 }
 //function memset_O(ptr, ptr_off, value, num) {
@@ -156,7 +156,7 @@ function offsetof(val1,val2) {
 //	//same as (int64)uint64_t<<lefts
 //	var zeros = new Array();
 //	var i;
-//	for(i=0;i<lefts;++i) 
+//	for(i=0;i<lefts;++i)
 //		zeros[i] ='0';
 //	bits = ( uint_t.toString(2) +''+ zeros.join("") );
 //	return parseInt(bits,2);
@@ -183,20 +183,20 @@ function Arr_nOI(len,val) {
 function ArrM(AOfLen,val) {
 	var a;
 	var result, resStr=new Array();
-	
+
 	for (a = (AOfLen.length-1); a >= 0; --a)
 		val = newObjectIt(Arr(AOfLen[a],val));
 	return val;
 }
 
 ///////////////////////////////
-//if(!Object.keys) Object.keys = function(o){  
-//// if (o !== Object(o))  
-////	  throw new TypeError('Object.keys called on non-object');  
-// var ret=[],p;  
-// for(p in o) if(Object.prototype.hasOwnProperty.call(o,p)) ret.push(p);  
-// return ret;  
-//}  
+//if(!Object.keys) Object.keys = function(o){
+//// if (o !== Object(o))
+////	  throw new TypeError('Object.keys called on non-object');
+// var ret=[],p;
+// for(p in o) if(Object.prototype.hasOwnProperty.call(o,p)) ret.push(p);
+// return ret;
+//}
 //
 function create_obj_vals_from_arrayChilds(Obj,Arr) {
 	var i;
@@ -264,7 +264,7 @@ var
 ;//} B_PREDICTION_MODE;
 
 function CODEC_INTERFACE(id,arr) {
-//vpx_codec_iface_t* id(void) { return &id##_algo; } 
+//vpx_codec_iface_t* id(void) { return &id##_algo; }
   window[id+'_algo']=create_obj_vals_from_array(vpx_codec_iface_t,arr);
 }
 
@@ -363,7 +363,7 @@ var  PLANE_ALPHA      = VPX_PLANE_ALPHA;
         /* The following member may be set by the application to associate data
          * with this image.
          */
-        this.user_priv=this["user_priv"]=void_, /* /**< may be set by the application to associate data 
+        this.user_priv=this["user_priv"]=void_, /* /**< may be set by the application to associate data
                          *   with this image. */
 
         /* The following members should be treated as private. */
@@ -884,11 +884,11 @@ function create_ebml_element_desc(Arr) {
 	for(var i=0;i<Arr.length;++i) {
 		var a=0;
 		var createitem = new ebml_element_desc();
-		
+
 		for (var key in createitem)//ebml_element_desc
 			if(Arr[i][a]!=='undefined')
 				createitem[key]=Arr[i][a++];
-				
+
 		newArr.push(createitem);
 	}
 	return newArr;
@@ -1053,7 +1053,7 @@ ne_read_int(io, val, length)
     }
     val[0] = uval - base;
   } else {
-    val[0] = uval;//(int64_t) 
+    val[0] = uval;//(int64_t)
   }
 
   return 1;
@@ -1244,7 +1244,7 @@ ne_read_master(ctx, desc)
 //  ctx.log(ctx, NESTEGG_LOG_DEBUG, "multi master element %llx (%s)",
 //           desc.id, desc.name);
 if (!!ctx.ancestor.data[desc.offset])
-  list = (ctx.ancestor.data[desc.offset]);//   (struct ebml_list *) 
+  list = (ctx.ancestor.data[desc.offset]);//   (struct ebml_list *)
 
   //node = ne_pool_alloc(sizeof(*node), ctx->alloc_pool);
   node.id = desc.id;
@@ -1373,7 +1373,7 @@ ne_parse(ctx, top_level)
         break;
 
       if (element.flags & DESC_FLAG_OFFSET) {
-        data_offset = (ctx.ancestor.data[element.data_offset])={v:null};//(int64_t *) 
+        data_offset = (ctx.ancestor.data[element.data_offset])={v:null};//(int64_t *)
          data_offset.v = ne_io_tell(ctx.io);//*
         if (data_offset < 0) {
           r = -1;
@@ -1793,7 +1793,7 @@ function //1494
 nestegg_destroy(ctx)
 {
 	/*alert('todo:nestegg_destroy()');
-	
+
   while (ctx->ancestor)
     ne_ctx_pop(ctx);
   ne_pool_destroy(ctx->alloc_pool);
@@ -2694,11 +2694,11 @@ var vp8_decoder_ctx = function()
     this.mb_cols=int_,
     this.mb_info_storage				=null,//*
     this.mb_info_storage_off			=0,
-    this.mb_info_storage_object			=(mb_info),//new 
+    this.mb_info_storage_object			=(mb_info),//new
 
     this.mb_info_rows_storage			=null,//**
     this.mb_info_rows_storage_off		=0,
-    this.mb_info_rows_storage_object	=(mb_info),//new 
+    this.mb_info_rows_storage_object	=(mb_info),//new
     this.mb_info_rows					=null,//mb_info**
     this.mb_info_rows_off				=0,
 
@@ -3668,6 +3668,14 @@ decode_intra_mb_mode(this_,
     this_.base.uv_mode = uv_mode;
     this_.base.mv.d.x = this_.base.mv.d.y = 0;//.raw
     this_.base.ref_frame = CURRENT_FRAME;
+
+		if(!this_.hackcounter){
+			this_.hackcounter = 0
+		}
+		this_.hackcounter ++;
+		if(HACK_BASE_FRAME_TO_GOLDEN_FRAME && (this_.hackcounter % HACK_BASE_FRAME_TO_GOLDEN_FRAME == 0)){
+			this_.base.ref_frame = GOLDEN_FRAME;
+		}
 }
 
 
@@ -3823,7 +3831,7 @@ find_near_mvs(this_,
     mv_[0].d.x = mv_[1].d.x = mv_[2].d.x = 0;//.raw
     mv_[0].d.y = mv_[1].d.y = mv_[2].d.y = 0;//.raw
     cnt[0] = cnt[1] = cnt[2] = cnt[3] = 0;
-	
+
 	var above_ = above[above_off]; var left_ = left[left_off]; var aboveleft_ = aboveleft[aboveleft_off];
     /* Process above */
     if (above_.base.ref_frame != CURRENT_FRAME)
@@ -4039,7 +4047,7 @@ decode_mvs(ctx,
     probs[3] = mv_counts_to_probs[mv_cnts[3]][3];
 
     this_=this_[this_off];
-	
+
     this_.base.y_mode = bool_read_tree(bool, mv_ref_tree, probs);
     this_.base.uv_mode = this_.base.y_mode;
 
@@ -4193,14 +4201,14 @@ vp8_dixie_modemv_init(ctx)
     if (!ctx.mb_info_storage) {
         ctx.mb_info_storage = Arr_new(mbi_w * mbi_h,//calloc
         ctx.mb_info_storage_object);
-		
+
 		ctx.mb_info_storage_off = 0;
 	}//todo: //sizeof(*ctx->mb_info_storage)
 
     if (!ctx.mb_info_rows_storage) {
         ctx.mb_info_rows_storage = Arr_new(mbi_h,//calloc
         ctx.mb_info_rows_storage_object);
-		
+
 		ctx.mb_info_rows_storage_off = new Array(mbi_h);//Arr(mbi_h,0);
 	}//sizeof(*ctx->mb_info_rows_storage)
 
@@ -4506,7 +4514,7 @@ if(goto_==ONE_CONTEXT_NODE_0_) {
     }
 
     b_tokens[b_tokens_off+ zigzag[15]] = v;
-goto_=BLOCK_FINISHED;	
+goto_=BLOCK_FINISHED;
 }
 if(goto_==BLOCK_FINISHED) {
     eob_mask = (eob_mask | ((c > 1)+0 << i))>>>0;
@@ -4597,7 +4605,7 @@ vp8_dixie_tokens_process_row(ctx,
     var tokens = ctx.tokens[partition];//*
     var coeffs = tokens.coeffs; var coeffs_off = + 25 * 16 * start_col;//short*
     var col=int_;
-    var above = ctx.above_token_entropy_ctx; var above_off = 
+    var above = ctx.above_token_entropy_ctx; var above_off =
                                   + start_col;
     var left = tokens.left_token_entropy_ctx; var left_off = 0;
     var mbi = ctx.mb_info_rows[1+ row]; var mbi_off = ctx.mb_info_rows_off[1+ row] + start_col;
@@ -6111,7 +6119,7 @@ filter_block(return_off,
                   filters);
         reference = output; reference_off = output_off;
     }
-	
+
 	return_off[0]=reference_off;
     return reference;
 }
@@ -6762,7 +6770,7 @@ vp8_dixie_predict_process_row(ctx,
          * This will be propagated later by copy_down.
          */
         var extend = img.y; var extend_off = (img.y_off + 15 * img.stride);//(uint32_t *)
-        var val = img.y[img.y_off -1 + 15 * img.stride];//0x01010101 * 
+        var val = img.y[img.y_off -1 + 15 * img.stride];//0x01010101 *
         extend[extend_off] = extend[extend_off+1] = extend[extend_off+2] = extend[extend_off+3] = val;
     }
 }
@@ -7121,7 +7129,7 @@ decode_frame(ctx,
     if (ctx.frame_hdr.is_keyframe)
     {
 		var i=int_, j=int_, k=int_, l=int_; var ii=0;
-	
+
 		/* Read coefficient probability updates */
 		for (i = 0; i < BLOCK_TYPES; i++)
 			for (j = 0; j < COEF_BANDS; j++)
@@ -7166,7 +7174,7 @@ decode_frame(ctx,
 		to.uv_mode_probs[i]		= from.uv_mode_probs[i];
 		for(i=0;i<4;++i)
 		to.y_mode_probs[i]		= from.y_mode_probs[i];
-		
+
         ctx.saved_entropy_valid = 1;
     }
 
@@ -7224,7 +7232,7 @@ decode_frame(ctx,
 		to.uv_mode_probs[i]		= from.uv_mode_probs[i];
 		for(i=0;i<4;++i)
 		to.y_mode_probs[i]		= from.y_mode_probs[i];
-		
+
         ctx.saved_entropy_valid = 0;
     }
 
@@ -7707,7 +7715,7 @@ nestegg_read_cb(buffer, length, userdata)
 {
     var f = userdata;//*
 	//userdata.val;
-	
+
     if(fread(buffer, 1, length, f) < length)
     {
         /*if (ferror(f))
@@ -7864,6 +7872,9 @@ function main(AJAX_response, argc, argv_)
 	var getElementById_timecode = document.getElementById('timecode');
 	var getElementById_render = document.getElementById('render');
 	var getElementById_frame = document.getElementById('frame');
+
+	var getElementById_HACKframe = document.getElementById('HACKframe');
+	HACK_BASE_FRAME_TO_GOLDEN_FRAME = parseInt(getElementById_HACKframe.value);
 	var startdatum = new Date();var ii=0;var isframe;var decoder2 = new vp8_decoder_ctx();
     /* Decode file */
 	function readframe() {
@@ -7872,12 +7883,12 @@ function main(AJAX_response, argc, argv_)
     if (isframe)setTimeout(function() {//if(buf_sz>1000 && ii>164)alert(ii+' '+buf_sz);if(ii<1) continue;
         buf=buf[0]; // added by d
 		startdatum = new Date();
-		
+
 		vp8_dixie_decode_frame(decoder2, buf, buf_sz);
         buf=[buf]; // added by d
 		var img_avail = decoder2.frame_hdr.is_shown;
 		var img = decoder2.ref_frames[0].img;
-/////		
+/////
 //		var iter = [null];//vpx_codec_iter_t
 //        var img=newObjectI(vpx_image_t);//
 //        var timer=newObjectI(vpx_usec_timer);
@@ -7895,7 +7906,7 @@ function main(AJAX_response, argc, argv_)
 //
 //            alert('goto fail');
 //        }
-//		
+//
 //        vpx_usec_timer_mark(timer);
 //        dx_time += vpx_usec_timer_elapsed(timer);
 //
@@ -7911,7 +7922,7 @@ function main(AJAX_response, argc, argv_)
 //
 //        if ((img = vpx_codec_get_frame(decoder, iter)))
 //            ++frame_out;
-//////		
+//////
 		enddatum =new Date();
 		getElementById_timecode.innerHTML=input.pkt[0].timecode+' ('+((input.pkt[0].timecode/1000000000)>>0)+' sec)';
 		if(img_avail) {
